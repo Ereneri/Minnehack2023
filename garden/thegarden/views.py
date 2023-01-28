@@ -12,3 +12,9 @@ def login_view(request):
         pass
     else:
         return render(request, "thegarden/login.html")
+
+def register_view(request):
+    if request.method == "POST":
+        pass
+    else:
+        return render(request, "thegarden/register.html")
