@@ -16,6 +16,7 @@ var img = new Image();
 renderer.setSize( window.innerWidth, window.innerHeight);
 document.body.appendChild( renderer.domElement );
 var controls = new OrbitControls( camera, renderer.domElement );
+camera.lookAt(renderer.domElement);
 
 var loader = new GLTFLoader();
 
@@ -23,6 +24,9 @@ var obj;
 loader.load("theme/static/huaranhuay/scene.gltf", function (gltf){
     obj = gltf.scene;
     scene.add(gltf.scene);
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    controls.enableRotate = false;
     
 });
 
