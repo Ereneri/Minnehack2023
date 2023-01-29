@@ -55,7 +55,7 @@ function update() {
     // call the update() function every frame - creates a loop
     requestAnimationFrame(update);
 
-    obj.rotation.y += 0.01;
+    obj.rotation.y += 0.005;
     obj.scale.set(0.2+scale,0.2+scale,0.2+scale);
     obj.position.set(0,-2,0);
     
