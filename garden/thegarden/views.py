@@ -24,10 +24,10 @@ def login_view(request):
             email = request.POST["email"]
             password = request.POST["password"]
             user = authenticate(request, email=email, password=password)
-            print(email + password)
 
             # Check if authentication successful
             if user is not None:
+                login(request, user)
                 return render(request, "thegarden/index.html")
             else:
                 return render(request, "thegarden/login.html", {
@@ -41,10 +41,11 @@ def register_view(request):
         username = request.POST["username"]
         email = request.POST["email"]
         password = request.POST["password"]
+        state = request.POST["state"]
 
         # Attempt to create new user
         try:
-            user = Account.objects.create_user(username, email, password)
+            user = Account.objects.create_user(email, username, state, password)
             user.save()
             login(request, user)
         except IntegrityError:
