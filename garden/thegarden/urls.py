@@ -9,5 +9,6 @@ urlpatterns = [
     path("logout/", views.logout_view, name="logout"),
     path("list_data/", views.list, name="list"),
     path("list/", views.list_view, name="list_view"),
-    # path("complete/<int:task_id>", views.complete, name="complete"),
+    path("incScore/", views.incScore, name="incScore"),
+    path('score/', views.score_view, name='score')
 ]

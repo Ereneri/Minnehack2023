@@ -31,6 +31,10 @@ function completeTask(id) {
             iscomplete: boolean
         })
     })
+
+    // delete task from list
+    var element = document.getElementById(id);
+    element.parentNode.removeChild(element);
 }
 
 function addDiv(title, id) {
@@ -39,17 +43,29 @@ function addDiv(title, id) {
     <div class="list-item pointer-events-auto w-[21rem] rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
         <div class="flex justify-between">
             <div class="font-medium text-slate-900">
-                <a onclick="setScalar(1.0)">${title}</a>
+                <a onclick="incScore()">${title}</a>
             </div>
         </div>
     </div>`;
     document.body.appendChild(newDiv);
 }
 
-function onclick(id) {
-    console.log(id);
-
-    // make change on database
-    setScalar(0.1);
+function incScore() {
+    // get score from database
+    fetch('/score/')
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        var score = data.score;
+        score += 1;
+        console.log(score);
+        // update score in database
+        fetch('/incScore/', {
+            method: 'PUT',
+            body: JSON.stringify({
+                score: score
+            })
+        })
+    })
 }
 
