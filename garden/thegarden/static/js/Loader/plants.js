@@ -47,8 +47,13 @@ function animate(){
 animate();
 
 var scale = 0;
-function setScalar(score){
-    scale += score;
+function setScalar(){
+    scale += 0.02;
+}
+
+var timestorun = document.getElementById("timestorun").textContent;
+for (var i = 0; i < timestorun; i++){
+    setScalar();
 }
 
 function update() {

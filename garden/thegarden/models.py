@@ -77,7 +77,7 @@ class Score(models.Model):
     score = models.IntegerField(default=0)
     user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
 
-    def __str__(self):
+    def __int__(self):
         return self.score
 
     class Meta:

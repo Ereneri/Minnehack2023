@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from .forms import CustomUserCreationForm
-from .models import Account, Task
+from .models import Account, Score, Task
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -12,7 +12,10 @@ from django.core import serializers
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        return render(request, "thegarden/index.html")
+        user = request.user
+        return render(request, "thegarden/index.html", {
+            "score": Score.objects.filter(user=user).first().score,
+        })
     else:
         return render(request, "thegarden/login.html")
 
@@ -25,6 +28,7 @@ def login_view(request):
             email = request.POST["email"]
             password = request.POST["password"]
             user = authenticate(request, email=email, password=password)
+            print(email + password)
 
             # Check if authentication successful
             if user is not None:

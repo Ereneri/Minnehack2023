@@ -39,10 +39,17 @@ function addDiv(title, id) {
     <div class="list-item pointer-events-auto w-[21rem] rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
         <div class="flex justify-between">
             <div class="font-medium text-slate-900">
-                <a onclick="completetask(${id})">${title}</a>
+                <a onclick="setScalar(1.0)">${title}</a>
             </div>
         </div>
     </div>`;
     document.body.appendChild(newDiv);
+}
+
+function onclick(id) {
+    console.log(id);
+
+    // make change on database
+    setScalar(0.1);
 }
 
