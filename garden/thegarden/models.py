@@ -72,3 +72,19 @@ class Task(models.Model):
             "title": self.title,
             "complete": self.complete,
         }
+
+class Score(models.Model):
+    score = models.IntegerField(default=0, max_length=20)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.score
+
+    class Meta:
+        ordering = ['score']
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "score": self.score,
+        }
