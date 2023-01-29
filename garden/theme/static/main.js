@@ -17,7 +17,7 @@ function loadlist() {
         } else {
             for (let i = 0; i < data.length; i++) {
                 console.log(data[i].id, data[i].title);
-                addDiv(data[i].title);
+                addDiv(data[i].title, data[i].id);
             }
         }
         htmlVAR += "</table>";
@@ -39,15 +39,16 @@ function completeTask(id) {
     })
 }
 
-function addDiv(title) {
+function addDiv(title, id) {
     var newDiv = document.createElement("div");
     newDiv.innerHTML = `
     <div class="list-item pointer-events-auto w-[21rem] rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
         <div class="flex justify-between">
             <div class="font-medium text-slate-900">
-                <a>${title}
+                <a onclick="completetask(${id})">${title}</a>
             </div>
         </div>
     </div>`;
     document.body.appendChild(newDiv);
 }
+
