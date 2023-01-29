@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
+
 
 # Create your views here.
 def index(request):
@@ -14,16 +15,16 @@ def index(request):
 def login_view(request):
     if request.method == "POST":
         # Attempt to sign user in
-        username = request.POST["email"]
+        email = request.POST["email"]
         password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        print(username + password)
+        user = authenticate(request, email=email, password=password)
+        print(email + password)
 
         # Check if authentication successful
         if user is not None:
-            return HttpResponse("fuck")
+            return HttpResponse("logging in")
         else:
-            return HttpResponse("logged in")
+            return HttpResponse("fuck")
     else:
         return render(request, "thegarden/login.html")
 

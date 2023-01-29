@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'garden.wsgi.application'
-#AUTH_USER_MODEL = 'account.Account'
+AUTH_USER_MODEL = 'thegarden.Account'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
