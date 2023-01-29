@@ -4,15 +4,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from .forms import CustomUserCreationForm
 from .models import Account
+from django.db import IntegrityError
 
 
 # Create your views here.
 def index(request):
-    return render(request, "thegarden/index.html")
-    # if request.user.is_authenticated:
-    #     return render(request, "thegarden/index.html")
-    # else:
-    #     return render(request, "thegarden/login.html")
+    if request.user.is_authenticated:
+        return render(request, "thegarden/index.html")
+    else:
+        return render(request, "thegarden/login.html")
 
 
 def login_view(request):
@@ -28,9 +28,11 @@ def login_view(request):
 
             # Check if authentication successful
             if user is not None:
-                return HttpResponse("logging in")
+                return render(request, "thegarden/index.html")
             else:
-                return HttpResponse("fuck")
+                return render(request, "thegarden/login.html", {
+                    "message": "Invalid email and password."
+                })
         else:
             return render(request, "thegarden/login.html")
 
@@ -41,9 +43,14 @@ def register_view(request):
         password = request.POST["password"]
 
         # Attempt to create new user
-        user = Account.objects.create_user(username, email, password)
-        user.save()
-        login(request, user)
+        try:
+            user = Account.objects.create_user(username, email, password)
+            user.save()
+            login(request, user)
+        except IntegrityError:
+            return render(request, "thegarden/register.html", {
+                "message": "Invalid username and/or email."
+            })
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "thegarden/register.html")
