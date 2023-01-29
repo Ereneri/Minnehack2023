@@ -13,3 +13,5 @@
 *.vsix
 garden/db.sqlite3
 garden/db.sqlite3
+
+**/__pycache__

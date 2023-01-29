@@ -6,4 +6,5 @@ from .models import *
 # admin.site.register(MyAccountManager)
 admin.site.register(Account)
 admin.site.register(Task)
+admin.site.register(Score)
 
