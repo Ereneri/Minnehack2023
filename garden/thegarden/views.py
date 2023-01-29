@@ -4,7 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def index(request):
-    return render(request, "thegarden/index.html")
+    if request.user.is_authenticated:
+        return render(request, "thegarden/garden.html")
+    else:
+        return render(request, "thegarden/login.html")
 
 
 def login_view(request):
