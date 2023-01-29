@@ -4,7 +4,8 @@ import { OrbitControls } from "./OrbitControls.js";
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1,3000);
 var renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
+
+renderer.setSize( window.innerWidth, (window.innerHeight/2 ));
 document.body.appendChild( renderer.domElement );
 var controls = new OrbitControls( camera, renderer.domElement );
 
