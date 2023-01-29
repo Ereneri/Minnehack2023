@@ -4,6 +4,28 @@
 {% tailwind_css %}
 
 {% block body %}
+{% if message %}
+<div id="alert" style="background: #7f1d1d">
+  <div class="mx-auto max-w-7xl py-3 px-3 sm:px-6 lg:px-8">
+    <div class="flex flex-wrap items-center justify-between">
+      <div class="flex w-0 flex-1">
+        <p class="ml-3 truncate font-medium text-white">
+            <span>{{ message }}</span>
+        </p>
+      </div>
+      <div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
+        <button onclick="dismissAlert()" type="button" class="-mr-1 flex rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2">
+          <span class="sr-only">Dismiss</span>
+          <!-- Heroicon name: outline/x-mark -->
+          <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="w-full max-w-md space-y-8">
       <div>
@@ -21,8 +43,8 @@
                 <input id="username" name="username" type="username" autocomplete="username" required class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Username">
               </div>
             <div>
-              <label for="email-address" class="sr-only">Email address</label>
-              <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address">
+              <label for="emai" class="sr-only">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address">
             </div>
             <div>
             <label for="password" class="sr-only">Password</label>
@@ -100,6 +122,21 @@
       </form>
     </div>
   </div>
+  <script>
+    function dismissAlert() {
+        var alert = document.getElementById('alert');
+        removeFadeOut(alert, 500);
+    }
+    function removeFadeOut( el, speed ) {
+        var seconds = speed/1000;
+        el.style.transition = "opacity "+seconds+"s ease";
+
+        el.style.opacity = 0;
+        setTimeout(function() {
+            el.parentNode.removeChild(el);
+        }, speed);
+    }
+  </script>
 {% endblock %}
 
 

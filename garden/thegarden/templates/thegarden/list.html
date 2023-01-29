@@ -1,0 +1,10 @@
+{% extends "thegarden/layout.html" %}
+{% load static %}
+{% load tailwind_tags %}
+{% tailwind_css %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+    <body id="list-wrapper" onload="loadlist()"></body>
+    {% endif %}
+{% endblock %}

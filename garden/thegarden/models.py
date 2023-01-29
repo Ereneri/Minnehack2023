@@ -54,3 +54,21 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+
+class Task(models.Model):
+    title = models.CharField(max_length=200)
+    complete = models.BooleanField(default=False)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['complete']
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "complete": self.complete,
+        }
