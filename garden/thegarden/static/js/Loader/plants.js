@@ -13,7 +13,7 @@ var controls = new OrbitControls( camera, renderer.domElement );
 var loader = new GLTFLoader();
 
 var obj;
-loader.load("theme/static/stegosaurs_SStenops.gltf", function (gltf){
+loader.load("theme/static/huaranhuay/scene.gltf", function (gltf){
     obj = gltf.scene;
     scene.add(gltf.scene);
     
@@ -22,9 +22,9 @@ loader.load("theme/static/stegosaurs_SStenops.gltf", function (gltf){
 
 
 scene.background = new THREE.Color (0xd3d3d3);
-var light = new THREE.HemisphereLight("white", "white", 2);
+var light = new THREE.HemisphereLight("white", "black", 2);
 scene.add(light);
-camera.position.set(1,7,5);
+camera.position.set(3,7,5);
 
 
 
@@ -46,6 +46,7 @@ function update() {
 
     obj.rotation.y += 0.01;
     obj.scale.set(0.5+scale,0.5+scale,0.5+scale);
+    obj.position.set(0,-2,0);
     
     // render the updated scene and camera
     renderer.render(scene, camera);
