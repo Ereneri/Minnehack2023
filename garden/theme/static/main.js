@@ -1,12 +1,6 @@
 function loadlist() {
     console.log("GOT TO LOADLIST")
-    var htmlVAR = `
-    <table class="table-auto">
-    <thead>
-    <tr>
-      <th>List</th>
-    </tr>
-  </thead>`;
+    var htmlVAR = '';
     fetch('/list_data/')
     .then(res => res.json())
     .then(data => {
