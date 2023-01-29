@@ -4,10 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def index(request):
-    if request.user.is_authenticated:
-        return render(request, "thegarden/garden.html")
-    else:
-        return render(request, "thegarden/login.html")
+    return render(request, "thegarden/index.html")
+    # if request.user.is_authenticated:
+    #     return render(request, "thegarden/index.html")
+    # else:
+    #     return render(request, "thegarden/login.html")
 
 
 def login_view(request):
@@ -16,15 +17,13 @@ def login_view(request):
         username = request.POST["email"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
+        print(username + password)
 
         # Check if authentication successful
         if user is not None:
-            login(request, user)
-            return HttpResponse("Logged in")
+            return HttpResponse("fuck")
         else:
-            return render(request, "thegarden/login.html", {
-                "message": "Invalid username and/or password."
-            })
+            return HttpResponse("logged in")
     else:
         return render(request, "thegarden/login.html")
 

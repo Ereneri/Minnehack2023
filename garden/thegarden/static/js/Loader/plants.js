@@ -11,11 +11,11 @@ var controls = new OrbitControls( camera, renderer.domElement );
 var loader = new GLTFLoader();
 
 var obj;
-loader.load("./monstera_tree/scene.gltf", function (gltf){
+loader.load("theme/static/scene.gltf", function (gltf){
     obj = gltf.scene;
     scene.add(gltf.scene);
     });
-loader.load("./monstera_tree/scene.gltf", function (gltf){
+loader.load("theme/static/scene.gltf", function (gltf){
     obj = gltf.scene;
     scene.add(gltf.scene);
     });
@@ -24,7 +24,6 @@ var light = new THREE.HemisphereLight("white", "white", 2);
 scene.add(light);
 camera.position.set(0,10,100);
 
-            
 
 function animate(){
     requestAnimationFrame( animate );
