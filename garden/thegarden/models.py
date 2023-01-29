@@ -43,8 +43,8 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     state = models.CharField(max_length=2)
 
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['username','state']
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ['email','state']
 
     objects = MyAccountManager()
     def __str__(self):
