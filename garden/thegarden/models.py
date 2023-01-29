@@ -74,7 +74,7 @@ class Task(models.Model):
         }
 
 class Score(models.Model):
-    score = models.IntegerField(default=0, max_length=20)
+    score = models.IntegerField(default=0)
     user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
