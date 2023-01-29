@@ -36,13 +36,13 @@ function completeTask(id) {
 function addDiv(title) {
     var newDiv = document.createElement("div");
     newDiv.innerHTML = `
-    <div class="pointer-events-auto w-[21rem] rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
+    <div class="list-item pointer-events-auto w-[21rem] rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
         <div class="flex justify-between">
             <div class="font-medium text-slate-900">
                 <input type="checkbox">
                 ${title}
             </div>
         </div>
-    </div>`
+    </div>`;
     document.body.appendChild(newDiv);
 }
