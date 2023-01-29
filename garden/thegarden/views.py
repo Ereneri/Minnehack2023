@@ -3,9 +3,11 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from .forms import CustomUserCreationForm
-from .models import Account
+from .models import Account, Task
 from django.db import IntegrityError
-
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.core import serializers
 
 # Create your views here.
 def index(request):
@@ -13,7 +15,6 @@ def index(request):
         return render(request, "thegarden/index.html")
     else:
         return render(request, "thegarden/login.html")
-
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -57,12 +58,31 @@ def register_view(request):
         return render(request, "thegarden/register.html")
 
 def garden_view(request):
-    return render(request, "thegarden/garden.html")
+    return render(request, "thegarden/index.html")
 
-def tasks_view(request):
-    pass
 
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
     return HttpResponseRedirect("/")
+
+@login_required
+def list(request):
+    user = request.user
+    # Return list contents
+    if request.method == "GET":
+        items = Task.objects.filter(user=user)
+        if (items.count() == 0):
+            return JsonResponse({'error':'No Tasks'}, safe=False)
+        items = items.all()
+        return JsonResponse([item.serialize() for item in items], safe=False)
+
+    # task must be via GET or PUT
+    else:
+        return JsonResponse({
+            "error": "GET or PUT request required."
+        }, status=400)
+
+@login_required
+def list_view(request):
+    return render(request, "thegarden/list.html")
