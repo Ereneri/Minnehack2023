@@ -6,7 +6,14 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1,2000);
 var renderer = new THREE.WebGLRenderer();
 
-renderer.setSize( window.innerWidth, (window.innerHeight/2 ));
+var img = new Image();
+	img.onload = function () {
+		scene.background = new THREE.TextureLoader().load("theme/static/Background.jpeg");
+		setBackground(scene, img.width, img.height);
+	};
+	img.src = "theme/static/Background.jpeg";
+
+renderer.setSize( window.innerWidth, window.innerHeight);
 document.body.appendChild( renderer.domElement );
 var controls = new OrbitControls( camera, renderer.domElement );
 
@@ -21,10 +28,10 @@ loader.load("theme/static/huaranhuay/scene.gltf", function (gltf){
 
 
 
-scene.background = new THREE.Color (0xd3d3d3);
+//scene.background = new THREE.Color (0xd3d3d3);
 var light = new THREE.HemisphereLight("white", "black", 2);
 scene.add(light);
-camera.position.set(3,7,5);
+camera.position.set(3,1,6);
 
 
 
@@ -45,7 +52,7 @@ function update() {
     requestAnimationFrame(update);
 
     obj.rotation.y += 0.01;
-    obj.scale.set(0.5+scale,0.5+scale,0.5+scale);
+    obj.scale.set(0.2+scale,0.2+scale,0.2+scale);
     obj.position.set(0,-2,0);
     
     // render the updated scene and camera
