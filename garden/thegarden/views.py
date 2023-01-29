@@ -55,6 +55,8 @@ def register_view(request):
             # Attempt to create new user
             try:
                 user = Account.objects.create_user(email, username, state, password)
+                score = Score(user=user, score=0)
+                score.save()
                 listofitems = [
                     "Volunteered or participated in community service",
                     "Shoveled or mowed for a neighbor",
@@ -142,3 +144,17 @@ def score_view(request):
         user = request.user
         score = Score.objects.filter(user=user).first()
         return JsonResponse({'score': score.score}, safe=False)
+
+@login_required
+@csrf_exempt
+def delete(request, id):
+    # Delete task
+    if request.method == "DELETE":
+        user = request.user
+        task = Task.objects.filter(user=user, id=id).first()
+        task.delete()
+        return JsonResponse({'message':'Task deleted successfully'}, safe=False)
+    else:
+        return JsonResponse({
+            "error": "DELETE request required."
+        }, status=400)

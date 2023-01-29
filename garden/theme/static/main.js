@@ -43,14 +43,14 @@ function addDiv(title, id) {
     <div class="list-item pointer-events-auto w-[21rem] rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
         <div class="flex justify-between">
             <div class="font-medium text-slate-900">
-                <a onclick="incScore()">${title}</a>
+                <a id="${id}" onclick="incScore(${id})">${title}</a>
             </div>
         </div>
     </div>`;
     document.body.appendChild(newDiv);
 }
 
-function incScore() {
+function incScore(id) {
     // get score from database
     fetch('/score/')
     .then(res => res.json())
@@ -67,5 +67,16 @@ function incScore() {
             })
         })
     })
+    deletetask(id);
+}
+
+function deletetask(id) {
+    console.log("GOT TO DELETETASK")
+    fetch('/delete/' + id, {
+        method: 'DELETE'
+    })
+    var element = document.getElementById(id);
+    element.parentNode.removeChild(element);
+    console.log("FINISHED DELETETASK")
 }
 

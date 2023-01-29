@@ -10,5 +10,6 @@ urlpatterns = [
     path("list_data/", views.list, name="list"),
     path("list/", views.list_view, name="list_view"),
     path("incScore/", views.incScore, name="incScore"),
-    path('score/', views.score_view, name='score')
+    path('score/', views.score_view, name='score'),
+    path('delete/<int:id>', views.delete, name='delete'),
 ]
