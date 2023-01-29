@@ -47,6 +47,28 @@ def register_view(request):
         # Attempt to create new user
         try:
             user = Account.objects.create_user(email, username, state, password)
+            listofitems = [
+                "Volunteered or participated in community service",
+                "Shoveled or mowed for a neighbor",
+                "Baby or dog sat for a neighbor",
+                "Visited a nursing home",
+                "Send cards to soldiers/elderly",
+                "Volunteer at a church or social event",
+                "Donated non perishable food to a charity drive",
+                "Donated money to charity",
+                "Donated supplies to a local nonprofit",
+                "Planted a tree or plant",
+                "Cleaned up trash at a local park",
+                "Used public transportation or a carpool",
+                "Adopted a pet from an animal shelter",
+                "Attended a community gathering",
+                "Started a community social group",
+                "Met a new neighbor",
+                "Help someone register to vote"
+            ]
+            for item in listofitems:
+                task = Task(user=user, title=item)
+                task.save()
             user.save()
             login(request, user)
         except IntegrityError:
