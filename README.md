@@ -19,3 +19,5 @@ We learned basic web development through incorporating users and learned more ab
 
 What's next for Community Garden
 In the future we would like to implement collaborative elements to our project so the community can work together to grow a communal garden by doing positive tasks. This would encourage more participation from users.
+
+python manage.py runserver
